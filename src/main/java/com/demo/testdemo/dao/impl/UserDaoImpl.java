@@ -23,7 +23,7 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
 
     @PostConstruct
     private void initDataSourseTag() {
-        setDataSource(dataSource);
+      setDataSource(dataSource);
     }
 
     @Override

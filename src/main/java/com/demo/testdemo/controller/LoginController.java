@@ -19,7 +19,7 @@ public class LoginController {
     @GetMapping("/login")
     @ResponseBody
     public String userLogin() {
-        return "login";
+        return new Gson().toJson(loginService.getUserDetails("thavam", "password"));
     }
 
     @PostMapping("/userlogin")
