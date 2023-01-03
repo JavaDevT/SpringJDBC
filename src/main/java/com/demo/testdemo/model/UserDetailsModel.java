@@ -1,41 +1,48 @@
 package com.demo.testdemo.model;
 
 public class UserDetailsModel {
-    private String userName;
+
+    private int PersonID;
+    private String Passwords;
+    private String LastName;
+    private String FirstName;
+    public int getPersonID() {
+        return PersonID;
+    }
+    public void setPersonID(int personID) {
+        PersonID = personID;
+    }
+    private String Address;
     private int age;
-    private String phoneNumber;
-    private String address;
-
-    public String getUserName() {
-        return userName;
+    public String getPasswords() {
+        return Passwords;
     }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setPasswords(String passwords) {
+        Passwords = passwords;
     }
-
+    public String getLastName() {
+        return LastName;
+    }
+    public void setLastName(String lastName) {
+        LastName = lastName;
+    }
+    public String getFirstName() {
+        return FirstName;
+    }
+    public void setFirstName(String firstName) {
+        FirstName = firstName;
+    }
+    public String getAddress() {
+        return Address;
+    }
+    public void setAddress(String address) {
+        Address = address;
+    }
     public int getAge() {
         return age;
     }
-
     public void setAge(int age) {
         this.age = age;
     }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
+    
 }

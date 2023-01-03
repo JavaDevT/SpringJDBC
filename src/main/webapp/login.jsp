@@ -12,7 +12,7 @@
 <h1>Hi Test demo</h1>
 
  
-<form action="userlogin" method="post">
+<form action="/userlogin" method="post">
 		UserName <input type="text" name="userName" placeholder=""/>
 		<br/><br/>
 		Password <input type="password" name="password" placeholder=""/>
@@ -20,6 +20,5 @@
 			<button>Submit</button>
 
 	</form>
-	<% } %>
-</body>
+ </body>
 </html>

@@ -8,6 +8,7 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Repository;
 
 import com.demo.testdemo.dao.UserDao;
@@ -23,30 +24,32 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
 
     @PostConstruct
     private void initDataSourseTag() {
-      setDataSource(dataSource);
+        setDataSource(dataSource);
     }
 
     @Override
     public UserDetailsModel getUserDetailsModel(String userName, String password) {
-        // String str = "select cast(aes_decrypt(unhex(`user_pswd`),'secret') as
-        // char(50)) as user_pswd from user where user_id=?";
-        String str = "select from userdetails where userName= ?  AND password = ?";
-        return getJdbcTemplate().queryForObject(str, new Object[] { userName, password },
-                new RowMapper<UserDetailsModel>() {
+       
+         String str = "select * from userEmp where FirstName = " + "'" + userName + "'" + " and Passwords = " + "'"
+                + password + "'";
+        System.out.println(str);
+        try {
+            return getJdbcTemplate().queryForObject(str, new RowMapper<UserDetailsModel>() {
+                @Override
+                @Nullable
+                public UserDetailsModel mapRow(ResultSet rs, int rowNum) throws SQLException {
+                    UserDetailsModel userDetailsModel = new UserDetailsModel();
+                    userDetailsModel.setAddress(rs.getString("Address"));
+                    userDetailsModel.setAge(rs.getInt("age"));
+                    userDetailsModel.setLastName(rs.getString("LastName"));
+                    userDetailsModel.setFirstName(rs.getString("FirstName"));
+                    return userDetailsModel;
+                }
+            });
 
-                    @Override
-                    public UserDetailsModel mapRow(ResultSet rs, int rowCount) throws SQLException {
-                        if (rowCount > 0) {
-                            UserDetailsModel userDetailsModel = new UserDetailsModel();
-                            userDetailsModel.setAddress(rs.getString("address"));
-                            userDetailsModel.setAge(rs.getInt("age"));
-                            userDetailsModel.setPhoneNumber(rs.getString("phonenumber"));
-                            userDetailsModel.setUserName(rs.getString("name"));
-                            return userDetailsModel;
-                        } else
-                            return null;
-                    }
-                });
+        } catch (Exception exception) {
+            return null;
+        }
 
     }
 
